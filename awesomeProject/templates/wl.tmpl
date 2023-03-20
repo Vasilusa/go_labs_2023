@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wish list</title>
+  <link rel="stylesheet" href="styles/wl.css">
+</head>
+<body>
+  <h1>Wish list</h1>
+
+  <form action="/wl" method="get">
+    <input type="number" id="itemCount" name="itemCount">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!--<script>
+    var form = document.querySelector('form');
+    var input = document.querySelector('#item-count');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var value = input.value;
+      form.action = '/wl?itemCount=' + value;
+      form.submit();
+    });
+  </script>-->
+
+  <ul>
+
+  {{range .products}}
+    <li>
+      <img src="image/{{.Image}}.jpg">
+      <span>{{.Code}}</span>
+      <span>{{.Price}}</span>
+    </li>
+    {{end}}
+  </ul>
+<!--
+  <label for="item-count">The number of items:</label>
+  <input type="number" id="item-count" name="item-count">
+-->
+</body>
+</html>
