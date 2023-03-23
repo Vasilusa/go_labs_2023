@@ -20,6 +20,9 @@ func New(dsn string) (*Repository, error) {
 		db: db,
 	}, nil
 }
+func (r *Repository) DelID(productId string) error {
+	return r.db.Delete(&ds.Product{}, productId).Error
+}
 
 func (r *Repository) GetProductByID(productId string) (*ds.Product, error) {
 	product := &ds.Product{}

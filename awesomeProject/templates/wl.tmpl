@@ -30,6 +30,12 @@
       <img src="image/{{.Image}}.jpg">
       <span>{{.Code}}</span>
       <span>{{.Price}}</span>
+      <span>
+        <form action="/del" method="get">
+        <input type="hidden" name="delId" value="{{.ID}}">
+        <button type="submit">Delete</button>
+        </form>
+      </span>
     </li>
     {{end}}
   </ul>

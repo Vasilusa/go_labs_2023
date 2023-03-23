@@ -39,7 +39,7 @@ func (a *Application) StartServer() {
 				return
 			}
 
-			fmt.Println("int id = ", intID)*/// выкидываем приведение к целому типу
+			fmt.Println("int id = ", intID)*/ // выкидываем приведение к целому типу
 
 			product, err := a.repo.GetProductByID(id)
 			if err != nil { // если не получилось
@@ -81,6 +81,26 @@ func (a *Application) StartServer() {
 			return
 		}
 
+		c.HTML(http.StatusOK, "wl.tmpl", gin.H{
+			"products": products,
+		})
+	})
+
+	r.GET("/del", func(c *gin.Context) {
+		delId := c.Query("delId")
+		a.repo.DelID(delId)
+
+		c.Redirect(http.StatusFound, "/wl")
+		products, err := a.repo.GetProductBelowID("")
+
+		for _, currentProduct := range products {
+			fmt.Println("debug products", currentProduct.ID, currentProduct.Code, currentProduct.Price, currentProduct.Image)
+		}
+
+		if err != nil {
+			c.Error(err)
+			return
+		}
 		c.HTML(http.StatusOK, "wl.tmpl", gin.H{
 			"products": products,
 		})
